@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <link rel="stylesheet" href="TarotStyle.css">
+        <meta name = "description" content="Get Free Tarot readings!">
+        <title>Digital Tarot</title>
+    </head>
+    <body>
+        <header>
+            <h1><i>Tarot Readings</i></h1>
+        </header>
+        <main>
+            <section class = "cards">
+                <div class="card">
+                    <p>hi</p>
+                </div>
+                <div class="card">
+                    <p>hi</p>
+                </div>
+                <div class="card">
+                    <p>hi</p>
+                </div>
+            </section>
+            <button type="button" id="dealButton">Deal  </button>
+            <button type="button" id="shuffleButton">Shuffle</button>
+            <button type="button" id="fortuneButton">Fortune</button>
+            <div class="fortune"></div>
+            
+        </main>
+        <script>
+            const cards = document.querySelector(".cards")
+            const individualCards = document.querySelectorAll(".card")
+            const dealButton = document.getElementById("dealButton")
+            const shuffleButton=document.getElementById("shuffleButton")
+            const fortuneButton = document.getElementById("fortuneButton")
+            
+            let cardCount = 0;
+
+            dealButton.addEventListener("click", function(){
+                if(cardCount<3){
+                    if(individualCards[cardCount].style.backgroundColor='black'){
+                            console.log(cardCount)
+                            cardCount++
+                            if(cardCount===3){
+                                fortuneButton.style.display='inline-block'
+                            }
+                            
+                        }
+                    else{
+                        individualCards[cardCount].style.backgroundColor='black'
+                        cardCount++;
+                        console.log(cardCount)
+                    }
+                }
+                else{
+                    
+                    console.log("end state")
+                }
+                    
+                console.log("working")
+            })
+            shuffleButton.addEventListener('click', function(){
+                cardCount = 0
+                fortuneButton.style.display='none'
+                document.querySelector(".fortune").innerHTML = '';
+                for(let i = 0; i < 3; i++){
+                    individualCards[i].style.backgroundColor='white'
+                }
+            })
+            fortuneButton.addEventListener('click', function(){
+                const options = {
+                    method: "POST", 
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${apiKey}`
+                    },
+                    body: JSON.stringify({
+                        model: "gpt-4o-mini",
+                        messages: [
+                            {role: "system", content: "You are a professional fortune teller and mystic that only tells tarot fortunes. If you receive an input of three cards corresponding to the standard tarot deck, repeat those cards. If you do not, speak the phrase: 'the mists remain muddy and strange...' and nothing else. If you receive three cards, spaced however which way, you will first say an activation phrase of your choice from the following list: 'Truth from the gibbet stars!', 'Ah... now I see... the mists part and are made clear...', 'Strange devices and peculiar intentions...'. Try not to use the same phrase twice in consecutive fortunes. Afterwards, speak the three cards in the order they were drawn, separating them each with a period. Then proceed with the fortune. Keep the fortune within five sentences or less. Default to heavy use of metaphor and adjacent. For instance, instead of 'you will do great in sports!' you would say something like 'all pursuits trend towards victory, yet b'ware overconfidence...' and so on and so forth. Think witches from Macbeth. If you do NOT receive three cards, for instance two cards or one and then two randoms, do not give a fortune. Instead say, 'the mists very nearly impart their truths. And yet...' If the cards you are given are exactly the same as the last ones you were given, say 'these truths have already been told... you must try another path.'"},
+                            {role: "user", content: "the empress the king of swords the world"}
+                        ]
+                    })
+                }
+
+                fetch(endpoint, options)
+                    .then(response => response.json())
+                    .then(data => {
+                        const message = data.choices[0].message.content
+                        document.querySelector(".fortune").innerHTML = message
+                        
+                    })
+            })
+
+        </script>
+    </body>
+</html>
