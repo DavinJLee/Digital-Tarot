@@ -8,9 +8,10 @@
     box-sizing: border-box;
 }
 html, head, body{
-    background-color: navy;
+    background-color: rgb(187, 187, 149);
     font-family:'Times New Roman', Times, serif;
     line-height: 1.5;
+    
 }
 main{
     margin: 0 auto; 
@@ -21,32 +22,50 @@ main{
 }
 
 h1{
-    color: white;
+    color: black;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 header{
     padding: 0px; 
-    background-color: blueviolet;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: beige;
+    box-shadow: 0px 1px 3px rgb(116,115,115);
 }
 .cards{
     display: grid; 
     margin: 0 auto;
+    margin-top: 100px;
     grid-template-columns: repeat(3, 1fr);
-    gap: 0.5rem;
-    background-color: red;
+    gap: 1rem;
+    background-color: beige;
     height: 500px;
     padding: 10px;
 
 }
 .card{
-    object-fit: cover;
-    margin: 0 auto;
-    background-color: white;
-    color: white;
+    display: inline-block;
     height: 90%;
     width: 17rem;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    perspective: 1000px;
+}
+.card img {
+    width: 100%; 
+    height: 100%; 
+    border-radius: 5px; 
+}
+.fortune{
+    padding: 10px;
+    max-width: 55rem; 
+    height: 500px; 
+    margin: 10px auto;
+    background-color: beige;
 }
 #fortuneButton{
     display: none;

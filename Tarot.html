@@ -13,13 +13,13 @@
         <main>
             <section class = "cards">
                 <div class="card">
-                    <img src="Cardback.jpg" alt="card-back">
+                    <img class=cardImage src="Cardback.jpg" alt="card-back">
                 </div>
                 <div class="card">
-                    <img src="Cardback.jpg" alt="card-back">
+                    <img class=cardImage src="Cardback.jpg" alt="card-back">
                 </div>
                 <div class="card">
-                    <img src="Cardback.jpg" alt="card-back">
+                    <img class=cardImage src="Cardback.jpg" alt="card-back">
                 </div>
             </section>
             <button type="button" id="dealButton">Deal  </button>
@@ -31,44 +31,165 @@
         <script>
             const cards = document.querySelector(".cards")
             const individualCards = document.querySelectorAll(".card")
+            const cardImages = document.querySelectorAll(".cardImage")
             const dealButton = document.getElementById("dealButton")
             const shuffleButton=document.getElementById("shuffleButton")
             const fortuneButton = document.getElementById("fortuneButton")
             
-            let cardCount = 0;
+            const cardArray = [
+                {name: "Eight of Pentacles", src:"EightOfPentacles.jpg", alt:"eight-of-pentacles", inversion: 0},
+                {name: "King of Pentacles", src:"KingOfPentacles.jpg", alt:"king-of-pentacles", inversion: 0},
+                {name: "Page of Pentacles", src:"PageOfPentacles.jpg", alt:"page-of-pentacles", inversion: 0},
+                {name: "Seven of Pentacles", src:"SevenOfPentacles.jpg", alt:"seven-of-pentacles", inversion: 0},
+                {name: "Queen of Pentacles", src:"QueenOfPentacles.jpg", alt:"queen-of-pentacles", inversion: 0},
+                {name: "Six of Pentacles", src:"SixOfPentacles.jpg", alt:"six-of-pentacles", inversion: 0},
+                {name: "Ten of Pentacles", src:"TenOfPentacles.jpg", alt:"ten-of-pentacles", inversion: 0},
+                {name: "Two of Pentacles", src:"TwoOfPentacles.jpg", alt:"two-of-pentacles", inversion: 0},
+                {name: "Nine of Pentacles", src:"NineOfPentacles.jpg", alt:"nine-of-pentacles", inversion: 0},
+                {name: "Three of Pentacles", src:"ThreeOfPentacles.jpg", alt:"three-of-pentacles", inversion: 0},
+                {name: "Four of Pentacles", src:"FourOfPentacles.jpg", alt:"four-of-pentacles", inversion: 0},
+                {name: "Five of Pentacles", src:"FiveOfPentacles.jpg", alt:"five-of-pentacles", inversion: 0},
+                {name: "Knight of Swords", src:"KnightOfSwords.jpg", alt:"knight-of-swords", inversion: 0},
+                {name: "King of Swords", src:"KingOfSwords.jpg", alt:"king-of-swords", inversion: 0},
+                {name: "Queen of Swords", src:"QueenOfSwords.jpg", alt:"queen-of-swords", inversion: 0},
+                {name: "Seven of Swords", src:"SevenOfSwords.jpg", alt:"seven-of-swords", inversion: 0},
+                {name: "Ten of Swords", src:"TenOfSwords.jpg", alt:"ten-of-swords", inversion: 0},
+                {name: "Nine of Swords", src:"NineOfSwords.jpg", alt:"nine-of-swords", inversion: 0},
+                {name: "Eight of Swords", src:"EightOfSwords.jpg", alt:"eight-of-swords", inversion: 0},
+                {name: "Page of Swords", src:"PageOfSwords.jpg", alt:"page-of-swords", inversion: 0},
+                {name: "Six of Swords", src:"SixOfSwords.jpg", alt:"six-of-swords", inversion: 0},
+                {name: "King of Cups", src:"KingOfCups.jpg", alt:"king-of-cups", inversion: 0},
+                {name: "Ace of Swords", src:"AceOfSwords.jpg", alt:"ace-of-swords", inversion: 0},
+                {name: "Four of Swords", src:"FourOfSwords.jpg", alt:"four-of-swords", inversion: 0},
+                {name: "Queen of Cups", src:"QueenOfCups.jpg", alt:"queen-of-cups", inversion: 0},
+                {name: "Nine of Cups", src:"NineOfCups.jpg", alt:"nine-of-cups", inversion: 0},
+                {name: "Five of Swords", src:"FiveOfSwords.jpg", alt:"five-of-swords", inversion: 0},
+                {name: "Ten of Cups", src:"TenOfCups.jpg", alt:"ten-of-cups", inversion: 0},
+                {name: "Two of Swords", src:"TwoOfSwords.jpg", alt:"two-of-swords", inversion: 0},
+                {name: "Three of Swords", src:"ThreeOfSwords.jpg", alt:"three-of-swords", inversion: 0},
+                {name: "Eight of Cups", src:"EightOfCups.jpg", alt:"eight-of-cups", inversion: 0},
+                {name: "Knight of Cups", src:"KnightOfCups.jpg", alt:"knight-of-cups", inversion: 0},
+                {name: "Page of Cups", src:"PageOfCups.jpg", alt:"page-of-cups", inversion: 0},
+                {name: "Five of Cups", src:"FiveOfCups.jpg", alt:"five-of-cups", inversion: 0},
+                {name: "Six of Cups", src:"SixOfCups.jpg", alt:"six-of-cups", inversion: 0},
+                {name: "Ace of Cups", src:"AceOfCups.jpg", alt:"ace-of-cups", inversion: 0},
+                {name: "Four of Cups", src:"FourOfCups.jpg", alt:"four-of-cups", inversion: 0},
+                {name: "Seven of Cups", src:"SevenOfCups.jpg", alt:"seven-of-cups", inversion: 0},
+                {name: "Two of Cups", src:"TwoOfCups.jpg", alt:"two-of-cups", inversion: 0},
+                {name: "Three of Cups", src:"ThreeOfCups.jpg", alt:"three-of-cups", inversion: 0},
+                {name: "King of Wands", src:"KingOfWands.jpg", alt:"king-of-wands", inversion: 0},
+                {name: "Queen of Wands", src:"QueenOfWands.jpg", alt:"queen-of-wands", inversion: 0},
+                {name: "Nine of Wands", src:"NineOfWands.jpg", alt:"nine-of-wands", inversion: 0},
+                {name: "Page of Wands", src:"PageOfWands.jpg", alt:"page-of-wands", inversion: 0},
+                {name: "Knight of Wands", src:"KnightOfWands.jpg", alt:"knight-of-wands", inversion: 0},
+                {name: "Six of Wands", src:"SixOfWands.jpg", alt:"six-of-wands", inversion: 0},
+                {name: "Seven of Wands", src:"SevenOfWands.jpg", alt:"seven-of-wands", inversion: 0},
+                {name: "Ten of Wands", src:"TenOfWands.jpg", alt:"ten-of-wands", inversion: 0},
+                {name: "Three of Wands", src:"ThreeOfWands.jpg", alt:"three-of-wands", inversion: 0},
+                {name: "Four of Wands", src:"FourOfWands.jpg", alt:"four-of-wands", inversion: 0},
+                {name: "Eight of Wands", src:"EightOfWands.jpg", alt:"eight-of-wands", inversion: 0},
+                {name: "Five of Wands", src:"FiveOfWands.jpg", alt:"five-of-wands", inversion: 0},
+                {name: "Ace of Wands", src:"AceOfWands.jpg", alt:"ace-of-wands", inversion: 0},
+                {name: "Two of Wands", src:"TwoOfWands.jpg", alt:"two-of-wands", inversion: 0},
+                {name: "The World", src:"TheWorld.jpg", alt:"world", inversion: 0},
+                {name: "Judgement", src:"Judgement.jpg", alt:"judgement", inversion: 0},
+                {name: "The Sun", src:"TheSun.jpg", alt:"sun", inversion: 0},
+                {name: "The Moon", src:"TheMoon.jpg", alt:"moon", inversion: 0},
+                {name: "The Devil", src:"TheDevil.jpg", alt:"devil", inversion: 0},
+                {name: "The Tower", src:"TheTower.jpg", alt:"tower", inversion: 0},
+                {name: "The Star", src:"TheStar.jpg", alt:"star", inversion: 0},
+                {name: "Death", src:"Death.jpg", alt:"death", inversion: 0},
+                {name: "Temperance", src:"Temperance.jpg", alt:"temperance", inversion: 0},
+                {name: "The Hermit", src:"TheHermit.jpg", alt:"hermit", inversion: 0},
+                {name: "The Hanged Man", src:"TheHangedMan.jpg", alt:"the-hanged-man", inversion: 0},
+                {name: "Justice", src:"Justice.jpg", alt:"justice", inversion: 0},
+                {name: "Wheel of Fortune", src:"WheelOfFortune.jpg", alt:"wheel", inversion: 0},
+                {name: "The Chariot", src:"TheChariot.jpg", alt:"chariot", inversion: 0},
+                {name: "Strength", src:"Strength.jpg", alt:"strength", inversion: 0},
+                {name: "The Hierophant", src:"TheHierophant.jpg", alt:"hierophant", inversion: 0},
+                {name: "The Empress", src:"TheEmpress.jpg", alt:"empress", inversion: 0},
+                {name: "The Magician", src:"TheMagician.jpg", alt:"TheMagician.jpg", inversion: 0},
+                {name: "The Fool", src:"TheFool.jpg", alt:"fool", inversion: 0},
+                {name: "The High Priestess", src:"TheHighPriestess.jpg", alt:"high priestess", inversion: 0},
+                {name: "The Emperor", src:"TheEmperor.jpg", alt:"emperor", inversion: 0},
+                {name: "The Lovers", src:"TheLovers.jpg", alt:"lovers", inversion: 0},
+                //{name: "", src:"", alt:"", inversion: 0},
+                {name: "Ace of Pentacles", src:"AceOfPentacles.jpg", alt:"ace-of-pentacles", inversion: 0}
+            ]
+            let cardCount = 0
+            let imagePicked = 0
+            let pickedImages = []
+            let pickedCards = []
+            const cardArrayLength = cardArray.length
 
+            function pickCard(){
+                let thisCard
+                let inversion
+                do {
+                    thisCard = Math.floor(Math.random() * cardArray.length)  
+                }
+                while (pickedImages.includes(thisCard))  
+                pickedImages.push(thisCard)
+                inversion = Math.random()
+                if(inversion > 0.65){
+                    cardArray[thisCard].inversion = 1
+                    pickedCards.push(cardArray[thisCard].name + ' inverted')
+                    
+                }
+                else{
+                    pickedCards.push(cardArray[thisCard].name)
+                }
+                
+                return thisCard;
+            }
             dealButton.addEventListener("click", function(){
-                if(cardCount<3){
-                    if(individualCards[cardCount].style.backgroundColor='black'){
-                            console.log(cardCount)
-                            cardCount++
-                            if(cardCount===3){
+                if(cardCount===2){
                                 fortuneButton.style.display='inline-block'
                             }
+                if(cardCount<3){
+                    if(!cardImages[cardCount].src.includes('Cardback.jpg')){
+                            console.log(cardCount)
+                            cardCount++
+                            
                             
                         }
                     else{
-                        individualCards[cardCount].style.backgroundColor='black'
+                        imagePicked = pickCard()
+                        cardImages[cardCount].src = cardArray[imagePicked].src
+                        if(cardArray[imagePicked].inversion ===1){
+                            cardImages[cardCount].style.transform = "rotate(180deg)"
+                        }
+                        cardImages[cardCount].alt = cardArray[imagePicked].alt
                         cardCount++;
-                        console.log(cardCount)
+                        
+                        
                     }
                 }
-                else{
+                
                     
-                    console.log("end state")
-                }
-                    
-                console.log("working")
+                
             })
             shuffleButton.addEventListener('click', function(){
-                cardCount = 0
+                
+                pickedImages = []
+                pickedCards = []
+                for(let i = 0; i < cardArrayLength; i++){
+                    if(i < cardCount){
+                        cardImages[i].style.transform = 'rotate(0deg)'
+                    }
+                    cardArray[i].inversion = 0;
+                }
                 fortuneButton.style.display='none'
                 document.querySelector(".fortune").innerHTML = '';
                 for(let i = 0; i < 3; i++){
-                    individualCards[i].style.backgroundColor='white'
+                    cardImages[i].src = 'Cardback.jpg'
+                    cardImages[i].alt ='card-back'
                 }
+                cardCount = 0
             })
             fortuneButton.addEventListener('click', function(){
+                fortuneButton.style.display='none'
+                console.log(pickedCards.join(", "))
                 const options = {
                     method: "POST", 
                     headers: {
@@ -78,8 +199,8 @@
                     body: JSON.stringify({
                         model: "gpt-4o-mini",
                         messages: [
-                            {role: "system", content: "You are a professional fortune teller and mystic that only tells tarot fortunes. If you receive an input of three cards corresponding to the standard tarot deck, repeat those cards. If you do not, speak the phrase: 'the mists remain muddy and strange...' and nothing else. If you receive three cards, spaced however which way, you will first say an activation phrase of your choice from the following list: 'Truth from the gibbet stars!', 'Ah... now I see... the mists part and are made clear...', 'Strange devices and peculiar intentions...'. Try not to use the same phrase twice in consecutive fortunes. Afterwards, speak the three cards in the order they were drawn, separating them each with a period. Then proceed with the fortune. Keep the fortune within five sentences or less. Default to heavy use of metaphor and adjacent. For instance, instead of 'you will do great in sports!' you would say something like 'all pursuits trend towards victory, yet b'ware overconfidence...' and so on and so forth. Think witches from Macbeth. If you do NOT receive three cards, for instance two cards or one and then two randoms, do not give a fortune. Instead say, 'the mists very nearly impart their truths. And yet...' If the cards you are given are exactly the same as the last ones you were given, say 'these truths have already been told... you must try another path.'"},
-                            {role: "user", content: "the empress the king of swords the world"}
+                            {role: "system", content: "You are a professional fortune teller and mystic that only tells tarot fortunes. If you receive an input of three cards corresponding to the standard tarot deck, repeat those cards. If you do not, speak the phrase: 'the mists remain muddy and strange... You must provide me with the magic cards three…' and nothing else. If you receive three cards, spaced however which way, you will first say a phrase from the following list according to the following rule - You cannot say the one that starts with 'Ah, now I see' unless every card is right way up, if even one is inverted, you must choose something else: ('Truth from the gibbet stars!', 'To see, you must watch. To know, you must think. To hear, you must listen. Now, listen well...', 'This road winds, but its destination I now divine...','Ah... now I see... the mists part and are made clear...', 'Strange devices and peculiar intentions... Let us see!'). Afterwards, speak the three cards in the order they were drawn, separating them each with a period. If a card is INVERTED, explain clearly how the inversion changes the meaning. For instance, if the world ordinarily means happiness, but inverted it means death, you must explain that directly. After each card, include TWO sentences going IN DEPTH on one of the cards, chosen at random. The first sentence must explain the card in depth, explaining how it differs from OTHER SUITS and the OTHERS OF ITS SUIT. The second sentence must explain what the card ADDS TO THE FORTUNE in terms of changing the final message. Then proceed with the fortune. Start with ONE clear sentence detailing the outline of your fortune. This should include: whether the luck is generally good or bad, whether ill omens are present in the cards or not, and the main idea of the fortune (eg love, ambition, etc). Afterwards, one sentence with heavy use of metaphor and adjacent. For instance, instead of 'you will do great in sports!' you would say something like 'all pursuits trend towards victory, yet b'ware overconfidence...' and so on and so forth. Think witches from Macbeth. The final sentence of your fortune must give ONE recommended course of action and ONE recommended philosophy tied to the cards. If you do NOT receive three cards, for instance two cards or one and then two randoms, do not give a fortune. Instead say, 'the mists very nearly impart their truths. And yet...' If the cards you are given are exactly the same as the last ones you were given, say 'these truths have already been told... you must try another path.' Across the ENTIRE FORTUNE, speak in clear language in an antiquated style. If any word is repeated more than twice, especially 'fortune', replace it with something else. If the repeated word is, in fact, 'fortune', replace it with something from the following pool, chosen at random: (stars' missive, divination, ancient wisdom )"},
+                            {role: "user", content: pickedCards.join(", ")}
                         ]
                     })
                 }
