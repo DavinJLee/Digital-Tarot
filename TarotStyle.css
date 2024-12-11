@@ -40,10 +40,8 @@ header{
     display: grid; 
     margin: 0 auto;
     background: none;
-    margin-top: 100px;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
-    
     height: 500px;
     padding: 10px;
    
@@ -89,13 +87,59 @@ header{
     height: 100%; 
     border-radius: 5px; 
 }
-.fortune{
+
+.fortune, .introduction{
     padding: 10px;
-    max-width: 55rem; 
-    height: 500px; 
-    margin: 10px auto;
+    width: 55rem; 
     background-color: beige;
+    border-radius: 5px;
+    box-shadow: 0px 3px 2px rgb(116,115,115);
 }
+.fortune{
+    height: 500px;
+    margin: 10px auto;
+}
+.introduction{
+    margin-top: 15px;
+    margin-bottom: 2rem;
+
+}
+
 #fortuneButton{
     display: none;
+    width: 20rem; 
+    height: 4rem;
+    background-color: antiquewhite;
+    font-weight: bold;
+    border-width: 0; 
+    box-shadow: 5px 5px 5px 5px rgb(116,115,115);
+    margin-bottom: 2rem;
+    border-radius: 5px;
+}
+.buttonArrayOne{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 5rem;
+    margin-bottom: 2rem;
+}
+#dealButton, #shuffleButton{
+    padding: 20px;
+    border-width: 0;
+    width: 10rem;
+    height: 4rem;
+    border-radius: 10px;
+    background-color: antiquewhite;
+    box-shadow: 5px 5px 5px rgb(116,115,115);
+}
+#dealButton:hover, #shuffleButton:hover, #fortuneButton:hover{
+    background-color: burlywood;
+}
+#dealButton:active, #shuffleButton:active{
+    transform:scale(0.8);
+}
+#fortuneButton:active{
+    transform:scale(0.7);
+    background-color: white;
 }

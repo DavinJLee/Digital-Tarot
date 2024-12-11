@@ -11,6 +11,19 @@
             <h1><i>Tarot Readings</i></h1>
         </header>
         <main>
+            <div class= "introduction">
+                <p>Ah. You've come a long way, traveler. Where have you come from? These are stranger fires than the ones you know. 
+                    
+                    ...But I forget myself. It is not my place 
+                    to ask questions of you.
+                </p>
+                <p>I see the look in your eyes. No need for the gift to divine what it is you desire today. Well, we have the time, and mine is a generous, giving spirit. 
+                    Come. Sit. Rare are those with the true gift, 
+                    but today you are in luck. 
+                    Fate weaves strange spindles around your person, their smell reminiscent of cedar and smoke, their guise not so different from strands of golden hair. 
+                    I may untangle them, if you wish, to read the secrets written thereupon. You need only say the word...
+                </p>
+            </div>
             <section class = "cards">
                 <div class="card">
                     <div class="cardBack">
@@ -39,24 +52,26 @@
                     </div>
                     
                 </div>
-                <!--<div class="card">
-                    <img class=cardImage src="Cardback.jpg" alt="card-back">
-                </div>-->
+                
             </section>
-            <button type="button" id="dealButton">Deal  </button>
-            <button type="button" id="shuffleButton">Shuffle</button>
-            <button type="button" id="fortuneButton">Fortune</button>
+            <section class="buttonArrayOne">
+                <button type="button" id="dealButton">Deal  </button>
+                <button type="button" id="shuffleButton">Shuffle</button>
+            </section>
+            <button type="button" id="fortuneButton">DIVINE YOUR FATE</button>
             <div class="fortune"></div>
             
         </main>
         <script>
             const cards = document.querySelector(".cards")
+            const introduction = document.querySelector(".introduction")
             const individualCards = document.querySelectorAll(".card")
             const frontImages = document.querySelectorAll(".frontImage")
             const dealButton = document.getElementById("dealButton")
             const shuffleButton=document.getElementById("shuffleButton")
             const fortuneButton = document.getElementById("fortuneButton")
             
+          
             
             const cardArray = [
                 {name: "Eight of Pentacles", src:"EightOfPentacles.jpg", alt:"eight-of-pentacles", inversion: 0},
@@ -215,10 +230,11 @@
                     cardArray[i].inversion = 0;
                 }
                 fortuneButton.style.display='none'
-                document.querySelector(".fortune").innerHTML = '';
+                document.querySelector(".fortune").innerHTML = ''
                 cardCount = 0
             })
             fortuneButton.addEventListener('click', function(){
+                introduction.style.display = 'none'
                 fortuneButton.style.display='none'
                 console.log(pickedCards.join(", "))
                 const options = {
@@ -243,6 +259,7 @@
                         document.querySelector(".fortune").innerHTML = message
                         
                     })
+                
             })
 
         </script>
