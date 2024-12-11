@@ -13,14 +13,35 @@
         <main>
             <section class = "cards">
                 <div class="card">
-                    <img class=cardImage src="Cardback.jpg" alt="card-back">
+                    <div class="cardBack">
+                        <img class=backImage src="Cardback.jpg" alt="card-back">
+                    </div>
+                    <div class="cardFront">
+                        <img class=frontImage src="Cardfront.jpg" alt="default-front">
+                    </div>
+                    
                 </div>
                 <div class="card">
-                    <img class=cardImage src="Cardback.jpg" alt="card-back">
+                    <div class="cardBack">
+                        <img class=backImage src="Cardback.jpg" alt="card-back">
+                    </div>
+                    <div class="cardFront">
+                        <img class=frontImage src="Cardfront.jpg" alt="default-front">
+                    </div>
+                    
                 </div>
                 <div class="card">
-                    <img class=cardImage src="Cardback.jpg" alt="card-back">
+                    <div class="cardBack">
+                        <img class=backImage src="Cardback.jpg" alt="card-back">
+                    </div>
+                    <div class="cardFront">
+                        <img class=frontImage src="Cardfront.jpg" alt="default-front">
+                    </div>
+                    
                 </div>
+                <!--<div class="card">
+                    <img class=cardImage src="Cardback.jpg" alt="card-back">
+                </div>-->
             </section>
             <button type="button" id="dealButton">Deal  </button>
             <button type="button" id="shuffleButton">Shuffle</button>
@@ -31,10 +52,11 @@
         <script>
             const cards = document.querySelector(".cards")
             const individualCards = document.querySelectorAll(".card")
-            const cardImages = document.querySelectorAll(".cardImage")
+            const frontImages = document.querySelectorAll(".frontImage")
             const dealButton = document.getElementById("dealButton")
             const shuffleButton=document.getElementById("shuffleButton")
             const fortuneButton = document.getElementById("fortuneButton")
+            
             
             const cardArray = [
                 {name: "Eight of Pentacles", src:"EightOfPentacles.jpg", alt:"eight-of-pentacles", inversion: 0},
@@ -120,7 +142,12 @@
             let imagePicked = 0
             let pickedImages = []
             let pickedCards = []
+            let cardFaces = [0, 0, 0]
             const cardArrayLength = cardArray.length
+
+            function flipCard(cardIndex){
+                individualCards[cardIndex].classList.toggle("flipCard")
+            }
 
             function pickCard(){
                 let thisCard
@@ -147,7 +174,7 @@
                                 fortuneButton.style.display='inline-block'
                             }
                 if(cardCount<3){
-                    if(!cardImages[cardCount].src.includes('Cardback.jpg')){
+                    if(cardFaces[cardCount] === 1){
                             console.log(cardCount)
                             cardCount++
                             
@@ -155,14 +182,18 @@
                         }
                     else{
                         imagePicked = pickCard()
-                        cardImages[cardCount].src = cardArray[imagePicked].src
+                        frontImages[cardCount].src = cardArray[imagePicked].src
+                        frontImages[cardCount].alt = cardArray[imagePicked].alt
                         if(cardArray[imagePicked].inversion ===1){
-                            cardImages[cardCount].style.transform = "rotate(180deg)"
+                            frontImages[cardCount].style.transform = "rotate(180deg)"
                         }
-                        cardImages[cardCount].alt = cardArray[imagePicked].alt
+                                                 
+                        individualCards[cardCount].classList.add('flipCard')
+                        cardFaces[cardCount] = 1
                         cardCount++;
                         
                         
+                                            
                     }
                 }
                 
@@ -175,16 +206,16 @@
                 pickedCards = []
                 for(let i = 0; i < cardArrayLength; i++){
                     if(i < cardCount){
-                        cardImages[i].style.transform = 'rotate(0deg)'
+                        frontImages[i].style.transform = 'rotate(0deg)'
+                        if(cardFaces[i]===1){
+                            individualCards[i].classList.remove('flipCard')
+                            cardFaces[i] = 0
+                        }
                     }
                     cardArray[i].inversion = 0;
                 }
                 fortuneButton.style.display='none'
                 document.querySelector(".fortune").innerHTML = '';
-                for(let i = 0; i < 3; i++){
-                    cardImages[i].src = 'Cardback.jpg'
-                    cardImages[i].alt ='card-back'
-                }
                 cardCount = 0
             })
             fortuneButton.addEventListener('click', function(){

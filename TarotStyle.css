@@ -39,22 +39,51 @@ header{
 .cards{
     display: grid; 
     margin: 0 auto;
+    background: none;
     margin-top: 100px;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
-    background-color: beige;
+    
     height: 500px;
     padding: 10px;
+   
 
 }
 .card{
     display: inline-block;
-    height: 90%;
-    width: 17rem;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-    border-radius: 5px;
-    perspective: 1000px;
+    height: 28rem;
+    width: 17rem;    
+    background: none;
+    transform-style: preserve-3d;
+    transition: transform 1s ease;
 }
+.cardFront{
+    position: absolute;
+    backface-visibility: hidden;
+    width: 100%; 
+    height: 100%;
+    background: none;
+    transform: rotateY(180deg);
+}
+.cardBack{
+    position: absolute;
+    backface-visibility: hidden;
+    width: 100%;
+    height: 100%;
+    background: none;
+    transform: rotateY(0deg);
+    
+}
+.flipCard .cardBack {
+    transition: transform 1s ease;
+    transform: rotateY(180deg); 
+}
+
+.flipCard .cardFront {
+    transition: transform 1s ease;
+    transform: rotateY(0deg); 
+}
+
 .card img {
     width: 100%; 
     height: 100%; 
