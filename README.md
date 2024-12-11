@@ -1,0 +1,1 @@
+Final Project for Web Development. Uses GPT API in conjunction with JS, HTML, and CSS to create a fully functional fortune-telling site in the old-fashioned style of the original, public-domain 1930s decks. 
