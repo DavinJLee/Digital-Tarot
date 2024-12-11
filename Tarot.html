@@ -204,10 +204,12 @@
                         if(cardArray[imagePicked].inversion ===1){
                             frontImages[cardCount].style.transform = "rotate(180deg)"
                         }
-                                                 
-                        individualCards[cardCount].classList.add('flipCard')
-                        cardFaces[cardCount] = 1
-                        cardCount++;
+                        setTimeout(() => {
+                            individualCards[cardCount].classList.add('flipCard')
+                            cardFaces[cardCount] = 1
+                            cardCount++;
+                        },100)                         
+                        
                         
                         
                                             
