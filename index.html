@@ -63,6 +63,15 @@
             
         </main>
         <script>
+            let apiKey
+            let apisub = prompt("Please enter a valid GPT api: ")
+            if(apisub !== null){
+                apiKey = apisub
+            }
+            else{
+                apiKey = "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"
+            }
+
             const cards = document.querySelector(".cards")
             const introduction = document.querySelector(".introduction")
             const individualCards = document.querySelectorAll(".card")
@@ -72,9 +81,7 @@
             const fortuneButton = document.getElementById("fortuneButton")
             
             const endpoint = "https://api.openai.com/v1/chat/completions"
-            const apiKey = "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"
-            
-            
+           
             const cardArray = [
                 {name: "Eight of Pentacles", src:"EightOfPentacles.jpg", alt:"eight-of-pentacles", inversion: 0},
                 {name: "King of Pentacles", src:"KingOfPentacles.jpg", alt:"king-of-pentacles", inversion: 0},
